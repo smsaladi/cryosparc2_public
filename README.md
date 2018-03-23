@@ -9,7 +9,7 @@
     4. ssh accessible from lab computers
     5. port 39000 HTTP accessible from lab computers
     6. all standalone workers accessible from this node (ssh)
-    7. all clusters accesible from this node (can launch jobs)
+    7. all clusters accessible from this node (can launch jobs)
     8. reliable disk for holding database
 3. at least one worker node or cluster scheduler
     1. can be same as master
@@ -20,7 +20,7 @@
 4. potentially other workers
     1. if shared installation dir AND same CUDA version AND same ssd path: can use the same worker installation on multiple workers. 
     2. deps are only compiled when you first install on one of the workers
-    3. subsequently on other workers you should just do cryosparcw connect
+    3. subsequently on other workers you should just do `cryosparcw connect`
     4. At update time, each worker is updated but they check versions so only the first will actually perform and recompile deps.
 5. Make sure basic dependencies are everywhere: gcc >= 4.4, CUDA, etc
 6. Must use `bash` as your default shell for now
@@ -34,7 +34,7 @@
 2. Select a DB path and have it ready (typically `~/cryosparc_database`)
 3. Select a port number (or leave out the `--port` flag to use the default 39000)
 
-```
+```bash
 export LICENSE_ID="your-license-id"
 curl -L https://get.cryosparc.com/download/master-latest/$LICENSE_ID > cryosparc2_master.tar.gz
 tar -xf cryosparc2_master.tar.gz
@@ -60,7 +60,7 @@ cryosparcm createuser <email> <password>
 3. Ensure you know where the SSD path is
 4. Ensure you know where the CUDA path is (i.e. `/usr/local/cuda`)
 
-```
+```bash
 export LICENSE_ID="blah"
 curl -L https://get.cryosparc.com/download/worker-latest/$LICENSE_ID > cryosparc2_worker.tar.gz
 tar -xf cryosparc2_worker.tar.gz
@@ -81,7 +81,7 @@ bin/cryosparcw connect <workerhostname> <masterhostname> <commandport>
 4. ensure you know where CUDA path is on cluster nodes (`/usr/local/cuda`)
 
 Log in interactively to a GPU node that will be scheduled on (if no internet do the download elsewhere first into home dir)
-```
+```bash
 export LICENSE_ID="blah"
 curl -L https://get.cryosparc.com/download/worker-latest/$LICENSE_ID > cryosparc2_worker.tar.gz
 tar -xf cryosparc2_worker.tar.gz
@@ -95,7 +95,7 @@ cd cryosparc2_master/run
 ```
 Above will generate templates for info and script, that need to be edited/filled out.
 Then:
-```
+```bash
 cryosparcm connectcluster info.json script.sh
 cryosparcm cli verify_cluster('clustername')
 ```
